@@ -1,6 +1,6 @@
 const asyncHandler = (fn) => async(req,res,next) => {
     try {
-        await fn(re,res,next);
+        await fn(req,res,next);
     } catch (error) {
         res.status(err.code || 500).json({
             success:false,
@@ -8,4 +8,12 @@ const asyncHandler = (fn) => async(req,res,next) => {
         })
     }
 }
-export {asyncHandler}
+
+// Promises version
+// const asyncHandler = (requestHandler) => {
+//     (req,res,next) =>{
+//         Promise.resolve(requestHandler(req,res,next)).catch((err) => next(err))
+//     }
+// }
+
+export default asyncHandler
