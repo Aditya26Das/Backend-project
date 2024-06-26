@@ -17,7 +17,7 @@ export const uploadOnCloudinary = async(localFilePath) =>{
             const uploadResult = await cloudinary.uploader
             .upload(
                 localFilePath, {
-                    resource_type : "video" //auto
+                    resource_type : "auto" //auto
                 }
             )
             .catch((error) => {
