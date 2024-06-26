@@ -7,7 +7,7 @@ const router = express.Router();
 router.route("/register").post(
     upload.fields([
         {
-            name : "Avatar",
+            name : "avatar",
             maxCount: 1
         },
         {
