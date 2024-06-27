@@ -42,7 +42,7 @@ const userSchema = new Schema(
             required : [true, "Avatar is Required."],
         },
         coverImage : {
-            type : String,
+            type : String, //Cloudinary Url
         },
         refreshToken : {
             type : String,
