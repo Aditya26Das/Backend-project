@@ -20,9 +20,6 @@ export const uploadOnCloudinary = async(localFilePath) =>{
                     resource_type : "auto" //auto
                 }
             )
-            .catch((error) => {
-                console.log("Cloudinary uploadResult error : " , error);
-            });
             return uploadResult;
         }
     } catch (error) {

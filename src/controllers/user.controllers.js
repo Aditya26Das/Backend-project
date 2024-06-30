@@ -29,8 +29,7 @@ const registerUser = asyncHandler( async (req,res) => {
 
     //check for images and check for avatar
     const avatarLocalPath = req.files?.avatar[0]?.path;
-    // const coverImageLocalPath = req.files?.coverImage[0]?.path
-    console.log(req.files);
+    // console.log(req.files);
 
     let coverImageLocalPath;
     if (req.files && Array.isArray(req.files.coverImage) && req.files.coverImage.length > 0) {
@@ -45,7 +44,6 @@ const registerUser = asyncHandler( async (req,res) => {
     //upload them to cloudinary
     const avatar = await uploadOnCloudinary(avatarLocalPath)
     const coverImage = await uploadOnCloudinary(coverImageLocalPath)
-    // console.log(coverImage)
     if(!avatar)
     {
         throw new ApiError(400, "Avatar File is required !")
@@ -53,14 +51,13 @@ const registerUser = asyncHandler( async (req,res) => {
 
     //create user object - create entry in db
     const user = await User.create({
-        fullName,
+        fullName: fullName,
         avatar : avatar.url,
         coverImage : coverImage?.url || "",
-        email,
-        password,
+        email:email,
+        password: password,
         userName : userName.toLowerCase()
-    })
-    // console.log(user)
+     })
     //remove password and refresh token field from response
     const createdUser = await User.findById(user._id).select("-password -refreshToken")
 

@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Define the directory where files will be stored
-const tempDir = path.join(__dirname, '../public/temp');
+const tempDir = path.join(__dirname, '../../public/temp');
 
 // Ensure the directory exists
 if (!fs.existsSync(tempDir)) {
