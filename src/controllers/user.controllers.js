@@ -3,7 +3,6 @@ import ApiError from "../utils/apiError.js";
 import ApiResponse from "../utils/apiResponse.js"
 import {User} from "../models/user.model.js"
 import {uploadOnCloudinary} from "../utils/cloudinary.server.js"
-import { set } from "mongoose";
 
 const generateAccessAndRefreshTokens = async(userId) => {
     try { 
@@ -12,6 +11,7 @@ const generateAccessAndRefreshTokens = async(userId) => {
         const refreshToken = user.generateRefreshToken()
         user.refreshToken = refreshToken
         await user.save({validateBeforeSave : false})
+        console.log(accessToken,refreshToken)
         return {accessToken,refreshToken}
     } catch (error) {
         throw new ApiError(500,"Something Went Wrong While Generating Refresh and Access tokens!")
@@ -88,7 +88,7 @@ const registerUser = asyncHandler( async (req,res) => {
 const loginUser = asyncHandler( async (req,res) => {
     // data from req body
     const {email,userName,password} = req.body;
-    if (!email || !userName) {
+    if (!(email || userName)) {
         throw new ApiError(400,"Username or Email is required");
     }
 
