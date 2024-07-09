@@ -28,6 +28,19 @@ export const uploadOnCloudinary = async(localFilePath) =>{
     }
 }
 
+export const deleteFromCloudinary = async(filePathUrl) => {
+    try {
+        await cloudinary.uploader.destroy(
+            filePathUrl,
+            {
+                resource_type: "image"
+            }
+        )
+    } catch (error) {
+        throw error
+    }
+}
+
 // (async function() {
 
 //     // Optimize delivery by resizing and applying auto-format and auto-quality
